@@ -128,3 +128,7 @@ data <- data %>%
 summary_data <- data %>%
   group_by(subject, activity, variable) %>%
   summarise(average = mean(value))
+
+# write this table to .txt file (for submission)
+write.table(summary_data, file = path('tidy_data.txt'), row.names = FALSE)
+

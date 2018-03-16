@@ -11,7 +11,6 @@ The R script `run_analysis.R` performs the main analysis. This script performs t
 - Cleans and organizes subject info, activity labels, and variable values from the training and test sets separately
 - Joins data from the training and test sets into a single dataframe
 - Creates meaningful names for the variables and activities described in the composite dataframe
--
 
 # Description of resulting datasets
 

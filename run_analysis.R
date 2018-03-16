@@ -2,12 +2,14 @@
 # last updated 03.15.2018
 
 # this script downloads, cleans, and summarizes data
-# collected from the accelerometers of the Samsung Galaxy S smartphones
+# collected from accelerometers of the Samsung Galaxy S smartphones
 
 # the two final dataframes of interest are: data, summary_data
-# data contains all data for all subjects, activities, and variables
-# summary_data contains averaged variables across all subject and activities
-# see the README in the project parent directory for variable descriptions
+# `data` contains all data for all subjects, activities, and variables
+# `summary_data` contains averaged variables across all subject and activities
+
+# see the README in the project parent directory for a full description of all variables 
+# in each resulting dataframe
 
 ######### initialization
 
@@ -117,6 +119,7 @@ dataColNames <- gsub('^[f]', 'freq_', dataColNames) # expand f in f... variable 
 names(data) <- dataColNames
 
 ######### make this a "long" dataset for the purposes of summarizing by subject, variable, and activity
+# (this makes the data tidy, but it should be noted that the previous "wide" version of the dataset was also tidy)
 data <- data %>%
   select(subject, activity, activityCode, dataset, time_BodyAcc_mean_X : freq_BodyBodyGyroJerkMag_std) %>%
   gather(key = variable, value = value, time_BodyAcc_mean_X : freq_BodyBodyGyroJerkMag_std, -subject, -activityCode, -dataset)
@@ -125,6 +128,3 @@ data <- data %>%
 summary_data <- data %>%
   group_by(subject, activity, variable) %>%
   summarise(average = mean(value))
-
-
-
